@@ -6,19 +6,15 @@
     <title>Get The Unfair Market Advantage</title>
     
     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1909303066305358');
-        fbq('track', 'PageView'); 
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1909303066305358&ev=PageView&noscript=1"/></noscript>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
+      ttq.load('D8V07OBC77U6CH9FI9LG');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
     <style>
         /* 基础页面设置：深色背景与自适应网格线 */
         body {
@@ -256,18 +252,19 @@
             const manualBtn = document.getElementById('manual-btn');
             manualBtn.href = targetUrl;
 
-            // 5. 基于点击动作的精准 Contact 追踪
+            // 5. 基于点击动作的精准 Contact 追踪 (已替换为 TikTok 逻辑)
             let eventFired = false;
             function fireContactEvent() {
-                if (!eventFired && typeof fbq === 'function') {
-                    fbq('track', 'Contact', {
-                        traffic_source: 'Meta_Lead_Form_Manual', 
-                        assigned_whatsapp: targetPhone,          
-                        user_os: userOS,                         
-                        action_source: 'website'                 
+                // 检查 ttq 是否已定义（TikTok Pixel 对象）
+                if (!eventFired && typeof ttq !== 'undefined') {
+                    // 使用 ttq.track 触发事件
+                    ttq.track('Contact', {
+                        content_name: 'Meta_Lead_Form_Manual', // 可以根据你的 TikTok 需求修改这些参数名
+                        content_category: userOS,                         
+                        value: targetPhone                 
                     });
                     eventFired = true; 
-                    console.log("Contact Event Fired Successfully.");
+                    console.log("TikTok Contact Event Fired Successfully.");
                 }
             }
 
